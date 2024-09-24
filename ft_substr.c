@@ -13,80 +13,63 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <stdlib.h>
 
-size_t ft_strlen(const char *s)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-    size_t len = 0;
-    while (s[len] != '\0')
-        len++;
-    return len;
-}
+    char    *substr;
+    size_t  i = 0, s_len = 0;
 
-// Función ft_substr
-char *ft_substr(const char *s, unsigned int start, size_t len)
-{
-    char *substr;
-    size_t s_len = ft_strlen(s);
+    // Calcular la longitud de la cadena 's'
+    while (s[s_len])
+        s_len++;
 
-    // Comprobar si start es mayor que la longitud de s
+    // Si 'start' está fuera de los límites de la cadena, devolver una cadena vacía
     if (start >= s_len)
-        return NULL; // Comportamiento indefinido
+        len = 0;
 
-    // Ajustar len si excede los caracteres restantes en s
+    // Ajustar 'len' si excede el tamaño disponible desde 'start'
     if (len > s_len - start)
         len = s_len - start;
 
-    // Reservar memoria para la subcadena + 1 para el carácter nulo
-    substr = (char *)malloc((len + 1) * sizeof(char));
+    // Reservar memoria para la subcadena (len + 1 para '\0')
+    substr = (char *)malloc(len + 1);
     if (!substr)
-        return NULL; // Retornar NULL si falla la asignación
+        return (NULL);
 
-    // Copiar la subcadena
-    for (size_t i = 0; i < len; i++)
+    // Copiar los caracteres de 's' a la subcadena
+    while (i < len && s[start + i])
+    {
         substr[i] = s[start + i];
+        i++;
+    }
 
-    // Añadir el carácter nulo al final
-    substr[len] = '\0';
-
-    return substr;
+    substr[i] = '\0'; // Añadir el terminador nulo
+    return (substr);
 }
 
 int main(void)
 {
     char *s = "Hola, mundo!";
-    char *sub;
+    unsigned int start = 7;
+    size_t len = 5;
+    char *result;
 
-    // Caso 1: Substring desde el índice 7, longitud 5 ("mundo")
-    sub = ft_substr(s, 7, 5);
-    if (sub)
+    // Llamar a ft_substr para obtener una subcadena de 's' desde el índice 'start' y longitud 'len'
+    result = ft_substr(s, start, len);
+
+    // Comprobar si la memoria se asignó correctamente
+    if (result == NULL)
     {
-        printf("Subcadena 1: %s\n", sub); // Debe imprimir "mundo"
-        free(sub);
+        printf("Error al reservar memoria.\n");
+        return (1);
     }
 
-    // Caso 2: Substring desde el índice 0, longitud 4 ("Hola")
-    sub = ft_substr(s, 0, 4);
-    if (sub)
-    {
-        printf("Subcadena 2: %s\n", sub); // Debe imprimir "Hola"
-        free(sub);
-    }
+    // Imprimir la subcadena resultante
+    printf("Subcadena resultante: '%s'\n", result);
 
-    // Caso 3: Substring desde el índice 20 (comportamiento indefinido)
-    sub = ft_substr(s, 20, 5);
-    if (sub)
-    {
-        printf("Subcadena 3: '%s'\n", sub); // No debería imprimirse
-        free(sub);
-    }
+    // Liberar la memoria asignada
+    free(result);
 
-    // Caso 4: Substring desde el índice 7, longitud 100
-    sub = ft_substr(s, 7, 100);
-    if (sub)
-    {
-        printf("Subcadena 4: %s\n", sub); // Debe imprimir "mundo!"
-        free(sub);
-    }
-
-    return 0;
+    return (0);
 }
