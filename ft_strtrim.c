@@ -1,5 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 14:57:11 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 14:57:13 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 
 static int is_in_set(char c, char const *set)
 {
@@ -40,29 +51,4 @@ char *ft_strtrim(char const *s1, char const *set)
 
     trimmed[i] = '\0'; // Terminar la cadena con '\0'
     return (trimmed);
-}
-
-int main(void)
-{
-    char *s1 = "   ***Hello World***   ";
-    char *set = " *";
-    char *result;
-
-    // Llamar a ft_strtrim para recortar la cadena s1 según los caracteres de set
-    result = ft_strtrim(s1, set);
-
-    // Comprobar si la memoria se asignó correctamente
-    if (result == NULL)
-    {
-        printf("Error al reservar memoria.\n");
-        return (1);
-    }
-
-    // Imprimir la cadena recortada
-    printf("Cadena recortada: '%s'\n", result);
-
-    // Liberar la memoria asignada
-    free(result);
-
-    return (0);
 }

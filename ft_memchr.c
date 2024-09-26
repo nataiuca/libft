@@ -1,15 +1,31 @@
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 11:55:51 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 12:00:36 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void *ft_memchr(const void *s, int c, size_t n) {
-    const unsigned char *p = (const unsigned char *)s;
-    unsigned char uc = (unsigned char)c;
+#include "libft.h"
 
-    while (n--) {
-        if (*p == uc) {
-            return (void *)p;  // Return pointer to the matching byte
-        }
-        p++;  // Move to the next byte
-    }
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	const unsigned char	*p;
+	unsigned char		uc;
 
-    return NULL;  // Return NULL if no match is found
+	p = (const unsigned char *)s;
+	uc = (unsigned char)c;
+	while (n--)
+	{
+		if (*p == uc)
+		{
+			return ((void *)p);
+		}
+		p++;
+	}
+	return (NULL);
 }

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:18:04 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/19 18:18:55 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:57:59 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-#include <stdlib.h>
+#include "libft.h"
 
 char *ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -46,30 +43,4 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 
     substr[i] = '\0'; // Añadir el terminador nulo
     return (substr);
-}
-
-int main(void)
-{
-    char *s = "Hola, mundo!";
-    unsigned int start = 7;
-    size_t len = 5;
-    char *result;
-
-    // Llamar a ft_substr para obtener una subcadena de 's' desde el índice 'start' y longitud 'len'
-    result = ft_substr(s, start, len);
-
-    // Comprobar si la memoria se asignó correctamente
-    if (result == NULL)
-    {
-        printf("Error al reservar memoria.\n");
-        return (1);
-    }
-
-    // Imprimir la subcadena resultante
-    printf("Subcadena resultante: '%s'\n", result);
-
-    // Liberar la memoria asignada
-    free(result);
-
-    return (0);
 }

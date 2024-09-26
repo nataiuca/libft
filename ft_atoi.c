@@ -1,23 +1,32 @@
-#include <unistd.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 10:34:20 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 13:13:41 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_atoi(char *str) {
+#include "libft.h"
+
+int ft_atoi(char *str) 
+{
     int sign = 1;
     int result = 0;
 
-    // Saltar espacios iniciales
-    while (*str == ' ' || (*str >= '\t' && *str <= '\r')) {
+      while (*str == ' ' || (*str >= '\t' && *str <= '\r')) {
         str++;
     }
 
-    // Manejar signos
     while (*str == '+' || *str == '-') {
         if (*str == '-')
             sign *= -1;
         str++;
     }
 
-    // Convertir dígitos
     while (*str >= '0' && *str <= '9') {
         result = result * 10 + (*str - '0');
         str++;

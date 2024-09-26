@@ -1,16 +1,32 @@
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 12:00:59 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 12:03:38 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_memcmp(const void *s1, const void *s2, size_t n) {
-    const unsigned char *p1 = (const unsigned char *)s1;
-    const unsigned char *p2 = (const unsigned char *)s2;
+#include "libft.h"
 
-    while (n--) {
-        if (*p1 != *p2) {
-            return *p1 - *p2;  // Return the difference between the first differing bytes
-        }
-        p1++;  // Move to the next byte in s1
-        p2++;  // Move to the next byte in s2
-    }
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-    return 0;  // Return 0 if all n bytes are equal
+	p1 = (const unsigned char *)s1;
+	p2 = (const unsigned char *)s2;
+	while (n--)
+	{
+		if (*p1 != *p2)
+		{
+			return (*p1 - *p2);
+		}
+		p1++;
+		p2++;
+	}
+	return (0);
 }

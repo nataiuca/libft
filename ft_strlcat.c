@@ -1,4 +1,16 @@
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 14:42:29 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 14:42:31 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 
 size_t ft_strlcat(char *dst, const char *src, size_t size) {
     size_t dst_len = 0;

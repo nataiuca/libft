@@ -1,13 +1,28 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 13:15:12 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 13:18:12 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void *ft_memset(void *s, int c, size_t n) {
-    char *ptr = s; // Cast s to an unsigned char pointer
-    size_t count = 0;       // Initialize a counter
+#include "libft.h"
 
-    while (count < n) {     // Loop until we fill n bytes
-        ptr[count] = c; // Set the byte
-        count++;            // Increment the counter
-    }
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*ptr;
+	size_t	count;
 
-    return s;              // Return the original pointer
+	ptr = s;
+	count = 0;
+	while (count < n)
+	{
+		ptr[count] = c;
+		count++;
+	}
+	return (s);
 }

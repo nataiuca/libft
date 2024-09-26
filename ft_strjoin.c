@@ -1,62 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 14:18:12 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 14:42:06 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-char *ft_strjoin(char const *s1, char const *s2)
-{
-    char    *result;
-    int     i = 0, j = 0, len1 = 0, len2 = 0;
+#include <stdlib.h>
 
-    // Calcular longitud de s1
-    while (s1[len1])
-        len1++;
-    // Calcular longitud de s2
-    while (s2[len2])
-        len2++;
-
-    // Reservar memoria para la nueva cadena (longitud de s1 + s2 + 1 para '\0')
-    result = (char *)malloc(len1 + len2 + 1);
-    if (!result)
-        return (NULL);
-
-    // Copiar s1 en la nueva cadena
-    while (i < len1)
-    {
-        result[i] = s1[i];
-        i++;
-    }
-
-    // Copiar s2 en la nueva cadena
-    while (j < len2)
-    {
-        result[i + j] = s2[j];
-        j++;
-    }
-
-    result[i + j] = '\0'; // Terminar la cadena con '\0'
-    return (result);
-}
-
-int main(void)
-{
-    char *s1 = "Hola, ";
-    char *s2 = "mundo!";
+char *ft_strjoin(char const *s1, char const *s2) {
+    int len1;
+    int len2;
     char *result;
+    int i;
 
-    // Llamar a ft_strjoin para concatenar s1 y s2
-    result = ft_strjoin(s1, s2);
-
-    // Comprobar si la memoria se asignó correctamente
-    if (result == NULL)
-    {
-        printf("Error al reservar memoria.\n");
-        return (1);
+    len1 = 0;
+    len2 = 0;
+    if (s1) {
+        while (s1[len1])
+            len1++;
     }
-
-    // Imprimir la cadena concatenada
-    printf("Cadena concatenada: %s\n", result);
-
-    // Liberar la memoria asignada
-    free(result);
-
-    return (0);
+    if (s2) {
+        while (s2[len2])
+            len2++;
+    }
+    result = malloc(len1 + len2 + 1);
+    if (result) {
+        i = 0;
+        while (i < len1) {
+            result[i] = s1[i];
+            i++;
+        }
+        while (i < len1 + len2) {
+            result[i] = s2[i - len1];
+            i++;
+        }
+        result[i] = '\0';
+        return result;
+    }
+    return NULL;
 }
+

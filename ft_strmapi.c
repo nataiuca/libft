@@ -1,6 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 14:44:04 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 14:44:17 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "libft.h"
 
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char)) {
     if (!s || !f) return NULL;
@@ -19,24 +29,4 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char)) {
     }
     new_str[i] = '\0';
     return new_str;
-}
-
-char example_func(unsigned int i, char c) {
-    if (i % 2 == 0 && c >= 'a' && c <= 'z')
-        return c - 32; // Convertir a mayúsculas
-    return c;
-}
-
-int main() {
-    char *str = "hola mundo";
-    char *result = ft_strmapi(str, example_func);
-
-    if (result) {
-        printf("Resultado: %s\n", result);
-        free(result); // Liberar la memoria asignada
-    } else {
-        printf("Error al aplicar la función.\n");
-    }
-
-    return 0;
 }

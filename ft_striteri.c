@@ -1,29 +1,27 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 14:15:25 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/26 14:17:28 by natferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*)) {
-    unsigned int i = 0;
+#include "libft.h"
 
-    if (!s || !f)
-        return;
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int i;
 
-    while (s[i]) {
-        f(i, &s[i]);
-        i++;
-    }
-}
-
-void my_function(unsigned int i, char *c) {
-    if (i % 2 == 0 && *c >= 'a' && *c <= 'z') {
-        *c -= 32; // Convertir a mayúscula
-    }
-}
-
-int main() {
-    char str[] = "hola mundo";  // Cadena de prueba
-
-    ft_striteri(str, my_function);  // Aplicar la función my_function a cada carácter de str
-
-    printf("Cadena modificada: %s\n", str);  // Imprimir la cadena modificada
-
-    return 0;
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
