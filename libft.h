@@ -47,11 +47,14 @@ int	ft_strlen(char *str);
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int ft_strncmp(char *s1, char *s2, unsigned int n);
 char *ft_strnstr(const char *big, const char *little, size_t len);
-char *strrchr(const char *s, int c);
+char *ft_strrchr(const char *s, int c);
 char *ft_strtrim(char const *s1, char const *set);
 char *ft_substr(char const *s, unsigned int start, size_t len);
 int ft_tolower(int c);
 int ft_toupper(int c);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strdup(const char *s);
+
 
 #endif
 

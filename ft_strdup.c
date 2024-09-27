@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 14:18:12 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/27 01:47:16 by natferna         ###   ########.fr       */
+/*   Created: 2024/09/27 00:29:27 by natferna          #+#    #+#             */
+/*   Updated: 2024/09/27 00:33:50 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(const char *s)
 {
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (str == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	return (str);
+    if (!s)
+        return (NULL);
+    size_t len = ft_strlen(s);
+    char *dup = malloc(len + 1); 
+    if (!dup)
+        return (NULL);
+    char *p = dup;
+    while ((*p++ = *s++)); 
+    return (dup);
 }
