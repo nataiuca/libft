@@ -6,7 +6,7 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:52:02 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 10:52:43 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:01:20 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isascii(int c)
 {
-	if (c <= 0 && c <= 127)
+	if (c >= 0 && c <= 127)
 		return (1);
 	else
 		return (0);

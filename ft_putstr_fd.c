@@ -6,7 +6,7 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:26:29 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 13:40:45 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:11:14 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_putstr_fd(char *s, int fd)
 	if (fd >= 0 && s)
 	{
 		while (s[i] != '\0')
+		{
 			write(fd, &s[i], 1);
-		i++;
+			i++;
+		}
 	}
 }

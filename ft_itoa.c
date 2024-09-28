@@ -6,35 +6,51 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:57:20 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 11:33:55 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:05:39 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
+
+static int	get_length(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		len;
-	int		tmp;
+	char			*ptr;
+	int				len;
+	unsigned int	num;
 
-	len = (n <= 0);
-	tmp = n;
-	while (tmp && ++len)
-		tmp /= 10;
-	str = malloc(len + 1);
-	if (!str)
+	len = get_length(n);
+	ptr = (char *)malloc(len + 1);
+	if (!ptr)
 		return (NULL);
-	str[len] = '\0';
-	if (n == 0)
-		str[0] = '0';
+	ptr[len] = '\0';
+	num = n;
 	if (n < 0)
-		*str = '-';
-	n = -n;
-	while (n)
 	{
-		str[--len] = n % 10 + '0';
-		n /= 10;
+		num = -n;
+		ptr[0] = '-';
 	}
-	return (str);
+	while (num != 0)
+	{
+		ptr[--len] = (num % 10) + '0';
+		num /= 10;
+	}
+	if (n == 0)
+		ptr[0] = '0';
+	return (ptr);
 }

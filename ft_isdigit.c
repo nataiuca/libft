@@ -6,24 +6,15 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:53:06 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 10:55:23 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:13:37 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(char *str)
+int	ft_isdigit(int c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] <= 47 || str[i] >= 58)
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (1);
+	if (c <= '9' && c >= '0')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:42:29 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/27 02:01:20 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:10:07 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,26 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	dst_len;
-	size_t	src_len;
-	size_t	i;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
 
-	dest_len = 0;
-	src_len = 0;
-	while (dst[dst_len] && dst_len < size)
-		dst_len++;
-	while (src[src_len])
-		src_len++;
-	if (dst_len < size - 1)
+	j = 0;
+	k = 0;
+	while (dst[j] && j < (unsigned int)size)
+		j++;
+	while (src[k])
+		k++;
+	if (size == 0)
+		return (ft_strlen((char *)src));
+	i = 0;
+	if (size - j == 0)
+		return (j + ft_strlen((char *)src));
+	while (src[i] && i < ((unsigned int)size - j - 1))
 	{
-		i = 0;
-		while (i < size - dst_len - 1 && src[i])
-		{
-			dst[dst_len + i] = src[i];
-			i++;
-		}
-		dst[dst_len + i] = '\0';
+		dst[i + j] = src[i];
+		++i;
 	}
-	return (dst_len + src_len);
+	dst[i + j] = '\0';
+	return (j + k);
 }
