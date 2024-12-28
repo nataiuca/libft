@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_handle_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 11:51:53 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 11:53:01 by natferna         ###   ########.fr       */
+/*   Created: 2024/10/10 16:55:13 by natferna          #+#    #+#             */
+/*   Updated: 2024/12/06 14:38:50 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_handle_str(char *str)
 {
-	t_list	*new_node;
+	int	len;
+	int	ret;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
+	len = 0;
+	if (!str)
+		str = "(null)";
+	while (*str)
+	{
+		ret = ft_handle_char(*str);
+		if (ret < 0)
+			return (-1);
+		len += ret;
+		str++;
+	}
+	return (len);
 }

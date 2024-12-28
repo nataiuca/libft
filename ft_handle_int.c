@@ -1,29 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_handle_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 11:34:14 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 11:41:36 by natferna         ###   ########.fr       */
+/*   Created: 2024/10/10 16:53:37 by natferna          #+#    #+#             */
+/*   Updated: 2024/12/06 14:38:40 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_handle_int(int n)
 {
-	t_list	*last;
+	int		len;
+	long	nb;
 
-	if (lst)
+	nb = n;
+	len = 0;
+	if (nb < 0)
 	{
-		if (*lst == NULL)
-			*lst = new;
-		else
-		{
-			last = ft_lstlast(*lst);
-			last->next = new;
-		}
+		len += ft_handle_char('-');
+		if (len < 0)
+			return (-1);
+		nb = -nb;
 	}
+	len += ft_putnbr(nb);
+	return (len);
+}
+
+int	ft_putnbr(long nb)
+{
+	int	len;
+
+	len = 0;
+	if (nb >= 10)
+	{
+		len += ft_putnbr(nb / 10);
+		if (len < 0)
+			return (-1);
+	}
+	len += ft_handle_char(nb % 10 + '0');
+	return (len);
 }

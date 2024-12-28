@@ -1,56 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_handle_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 10:57:20 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/28 23:05:39 by natferna         ###   ########.fr       */
+/*   Created: 2024/10/10 16:54:22 by natferna          #+#    #+#             */
+/*   Updated: 2024/12/06 14:38:45 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
 
-static int	get_length(int n)
+int	ft_handle_ptr(void *ptr)
 {
 	int	len;
 
 	len = 0;
-	if (n <= 0)
-		len = 1;
-	while (n != 0)
+	if (!ptr)
 	{
-		n /= 10;
-		len++;
+		len += write(1, "0x0", 3);
+		return (len);
 	}
+	len += write(1, "0x", 2);
+	if (len < 0)
+		return (-1);
+	len += ft_put_hex_ptr((uintptr_t)ptr);
 	return (len);
 }
 
-char	*ft_itoa(int n)
+int	ft_put_hex_ptr(uintptr_t num)
 {
-	char			*ptr;
-	int				len;
-	unsigned int	num;
+	char	*hex;
+	int		len;
 
-	len = get_length(n);
-	ptr = (char *)malloc(len + 1);
-	if (!ptr)
-		return (NULL);
-	ptr[len] = '\0';
-	num = n;
-	if (n < 0)
-	{
-		num = -n;
-		ptr[0] = '-';
-	}
-	while (num != 0)
-	{
-		ptr[--len] = (num % 10) + '0';
-		num /= 10;
-	}
-	if (n == 0)
-		ptr[0] = '0';
-	return (ptr);
+	hex = "0123456789abcdef";
+	len = 0;
+	if (num >= 16)
+		len += ft_put_hex_ptr(num / 16);
+	len += ft_handle_char(hex[num % 16]);
+	return (len);
 }

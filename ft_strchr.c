@@ -6,7 +6,7 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:12:07 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 14:14:49 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:10:43 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strchr(const char *s, int c)
 		}
 		s++;
 	}
-	if (c == '\0')
+	if ((char)c == '\0')
 	{
 		return ((char *)s);
 	}

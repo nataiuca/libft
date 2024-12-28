@@ -6,7 +6,7 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:55:47 by natferna          #+#    #+#             */
-/*   Updated: 2024/09/26 10:56:50 by natferna         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:02:06 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isprint(int c)
 {
-	if (c >= ' ' && c >= '~')
+	if (c >= ' ' && c <= '~')
 		return (1);
 	else
 		return (0);
