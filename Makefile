@@ -1,62 +1,51 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/28 19:00:31 by natferna          #+#    #+#              #
-#    Updated: 2024/12/28 21:54:03 by natferna         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+LIBFT_NAME := libft.a
+LIBFT_GH := https://github.com/josejpgg/libft_increment.git
+LIBFT_PATH := ./libft/
+PROGRAM_NAME := minishell
+CC = cc
+FLAGS =
+# FLAGS = -Wall -Werror -Wextra
+SOURCE := main.c env.c param.c \
+safe_func.c interactive.c safe_free.c str_util.c \
+command.c line.c pipe.c redirection.c token.c history.c history2.c \
+expand.c
+READLINE := -I/usr/local/opt/readline/include -L/usr/local/opt/readline/lib -lreadline
+COMPILE := ${SOURCE:.c=.o}
 
+all: $(LIBFT_PATH)$(LIBFT_NAME) $(PROGRAM_NAME)
 
-NAME = libft.a
-
-CC = gcc
-
-SRC = ft_atoi.c ft_bzero.c ft_isalnum.c \
-      ft_isalpha.c ft_isascii.c ft_isdigit.c \
-      ft_isprint.c ft_itoa.c ft_memchr.c \
-      ft_memcmp.c ft_memcpy.c ft_memmove.c \
-      ft_memset.c ft_putchar_fd.c ft_putendl_fd.c \
-	  ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
-	  ft_strchr.c ft_striteri.c ft_strjoin.c \
-	  ft_strlcat.c ft_strlcpy.c ft_strlen.c \
-	  ft_strmapi.c ft_strncmp.c ft_strnstr.c \
-	  ft_strrchr.c ft_strtrim.c ft_substr.c \
-	  ft_tolower.c ft_toupper.c ft_calloc.c \
-	  ft_strdup.c ft_printf.c ft_handle_hex.c ft_handle_ptr.c ft_handle_unsigned.c \
-       ft_handle_char.c ft_handle_int.c ft_handle_str.c
-
-BONUS_SRC = ft_lstadd_back_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
-      ft_lstadd_front_bonus.c ft_lstclear_bonus.c ft_lstdelone_bonus.c \
-      ft_lstiter_bonus.c ft_lstlast_bonus.c ft_lstmap_bonus.c \
-
-OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJ) $(BONUS_OBJ) 
-	@ar rc $(NAME) $(OBJ) $(BONUS_OBJ)
-	@ranlib $(NAME)
-	@echo "$(NAME) created and indexed"
-
+# Regla para compilar archivos .c a .o
 %.o: %.c
-	$(CC) $(FLAG) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
-bonus: $(NAME) 
-	@echo "$(NAME) with bonus created and indexed"
+# Regla para enlazar y generar el ejecutable (AQUÍ usamos -lreadline y libft.a)
+$(PROGRAM_NAME): $(COMPILE) $(LIBFT_PATH)$(LIBFT_NAME)
+	$(CC) $(FLAGS) $(COMPILE) -L$(LIBFT_PATH) -lft $(READLINE) -o $@
+
+$(LIBFT_PATH)$(LIBFT_NAME):
+	@if [ ! -d "$(LIBFT_PATH)" ]; then \
+        mkdir -p $(LIBFT_PATH); \
+        git clone $(LIBFT_GH) $(LIBFT_PATH); \
+    fi
+	@make -C $(LIBFT_PATH)
 
 clean:
-	@rm -f $(OBJ) $(BONUS_OBJ)
-	@echo "OBJ and BONUS_OBJ deleted"
+	@rm -rf $(COMPILE) $(PROGRAM_NAME)
+	@if [ -d "$(LIBFT_PATH)" ]; then \
+        @make clean -C $(LIBFT_PATH); \
+    fi
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(NAME) deleted"
+	@rm -rf $(LIBFT_PATH)$(LIBFT_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+test: all clean
+    # echo 'grep hi "<infile"' | ./minishell
+    # echo 'grep hi "<infile" <         ./test_files/infile' | ./minishell
+	echo '' | ./minishell
+
+leaksCampus:
+    valgrind --leak-check=yes ./minishell
+
+.PHONY: all clean fclean re libft
